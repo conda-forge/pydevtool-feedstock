@@ -5,21 +5,21 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/p/pydevtool/pydevtool-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/p/pydevtool/pydevtool-{{ version }}.tar.gz
   sha256: 25e3ba4f3d33ccac33ee2b9775995848d49e9b318b7a146477fb5d52f786fc8a
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.8
+    - python {{ python_min }}
   run:
     - doit
-    - python >=3.8
+    - python >={{ python_min }}
 
 test:
   imports:
@@ -28,6 +28,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/pydoit/pydevtool
